@@ -10,14 +10,9 @@ import { Residence } from 'src/app/Core/Models/residence';
 })
 export class AddResidenceComponent {
 
-  listResidences:Residence[]=[
-    {id:1,"name": "El fel","address":"Borj Cedria", "image":"../../assets/images/R1.jpg", status: "Disponible"},
-    {id:2,"name": "El yasmine", "address":"Ezzahra","image":"../../assets/images/R2.jpg", status: "Disponible" },
-    {id:3,"name": "El Arij", "address":"Rades","image":"../../assets/images/R3.jpg", status: "Vendu"},
-    {id:4,"name": "El Anber","address":"inconnu", "image":"../../assets/images/R3.jpg", status: "En Construction"}
-  ];
+  listResidences:Residence[]=[];
 
- 
+
   listApartments:Apartment[]=[
     {id:1,"apartNum":11,"floorNum":0,"surface":100,"terrace":true,"surfaceterrace":20,"category":"S+1", ResidenceId: this.listResidences[0].id },
     {id:2,"apartNum":102,"floorNum":1,"surface":130,"terrace":false,"surfaceterrace":0,"category":"S+2",ResidenceId: this.listResidences[0].id},
@@ -35,7 +30,7 @@ export class AddResidenceComponent {
     Apartments: this.fb.array([ ])
   });
 
-  
+
   get name() { return this.addResidenceForm.get('name'); }
   get address() { return this.addResidenceForm.get('address'); }
   get image() { return this.addResidenceForm.get('image'); }
@@ -52,20 +47,20 @@ export class AddResidenceComponent {
       surfaceterrace: [''],
       category: ['']
     });
-  
+
     this.Apartments.push(apartmentForm);
   }
 
   saveR(){
-let newResidence: Residence = {   
+let newResidence: Residence = {
   id: this.listResidences.length + 1,
   name: this.addResidenceForm.value.name || '',
   address: this.addResidenceForm.value.address || '',
   image: this.addResidenceForm.value.image || '',
   status: this.addResidenceForm.value.status || ''}
   this.listResidences.push(newResidence);
-  
-  
+
+
   this.Apartments.value.forEach((element: any) => {
   let newApart: Apartment = {
     id: this.listApartments.length+1,
@@ -77,7 +72,7 @@ let newResidence: Residence = {
     category: element.category,
     ResidenceId: newResidence.id
   }
-  this.listApartments.push(newApart);   
+  this.listApartments.push(newApart);
 });
 
 console.log(this.listResidences);
